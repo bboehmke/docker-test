@@ -21,6 +21,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/bboehmke/docker-test:latest,ghcr.io/bboehmke/docker-test:${{env.timestamp}}
+          tags: ghcr.io/bboehmke/docker-test:${{env.timestamp}},ghcr.io/bboehmke/docker-test:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
