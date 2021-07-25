@@ -15,11 +15,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Timestamp
+        run: echo "timestamp=$(date '+%Y%m%d_%H%M%S')" >> $GITHUB_ENV
       - name: Build and push
-        id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/bboehmke/docker-test:latest
+          tags: ghcr.io/bboehmke/docker-test:latest,ghcr.io/bboehmke/docker-test:${{env.timestamp}}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
